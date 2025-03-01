@@ -42,7 +42,8 @@ type SearchInputProps = {
   placeholder: string;
 };
 
-type PaginationControler = {
+type PaginationControlerProps = {
+  defaultValue: 5 | 10 | 15 | 20;
   handleChange: (e: SyntheticEvent, value: number) => void;
 };
 
@@ -129,12 +130,14 @@ function SearchInput({
 
 function PaginationControler({
   handleChange,
-}: PaginationControler): JSX.Element {
+  defaultValue
+}: PaginationControlerProps): JSX.Element {
   return (
     <div className="">
       <select
         onChange={(e) => handleChange(e, Number(e.target.value))}
         className="border-none outline-none cursor-pointer"
+        defaultValue={defaultValue}
       >
         <option value={5}>5 Entries</option>
         <option value={10}>10 Entries</option>

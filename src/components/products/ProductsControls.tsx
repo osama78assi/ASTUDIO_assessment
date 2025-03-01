@@ -11,7 +11,9 @@ import Controls from "../ui/Controls";
 import CategorySelect from "./CategorySelect";
 
 function ProductsControls() {
-  const category = useSelector((state: RootState) => state.products.category);
+  const { category, recordsPerPage } = useSelector(
+    (state: RootState) => state.products
+  );
   const dispatch = useDispatch<AppDispatch>();
 
   function handleChangePageSize(_, value: number) {
@@ -33,7 +35,10 @@ function ProductsControls() {
 
   return (
     <Controls matchMaxMediaAt={700}>
-      <Controls.PaginationControler handleChange={handleChangePageSize} />
+      <Controls.PaginationControler
+        defaultValue={recordsPerPage}
+        handleChange={handleChangePageSize}
+      />
 
       <Controls.SearchInput
         handleSearch={searchFor}

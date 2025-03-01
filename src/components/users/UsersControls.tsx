@@ -13,7 +13,7 @@ import Controls from "../ui/Controls";
 
 function UsersControls() {
   const dispatch = useDispatch<AppDispatch>();
-  const { isLoading, filterField } = useSelector(
+  const { isLoading, filterField, recordsPerPage } = useSelector(
     (state: RootState) => state.users
   );
 
@@ -61,7 +61,10 @@ function UsersControls() {
 
   return (
     <Controls matchMaxMediaAt={700}>
-      <Controls.PaginationControler handleChange={handleChangePageSize} />
+      <Controls.PaginationControler
+        defaultValue={recordsPerPage}
+        handleChange={handleChangePageSize}
+      />
 
       <Controls.SearchInput
         handleSearch={searchFor}

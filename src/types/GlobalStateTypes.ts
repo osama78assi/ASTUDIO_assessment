@@ -2,7 +2,7 @@ import { Product, User } from "./APIsResponseTypes";
 
 type Common = {
   currentPage: number;
-  recordsPerPage: number;
+  recordsPerPage: 5 | 10 | 15 | 20;
   isLoading: boolean;
   error: Error | null;
   searchValue: string; // Search and filter in the client side
