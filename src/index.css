@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  --primary-black: #322625;
+  --primary-gray: #ebebeb;
+  --primary-blue: #c0e3e5;
+  --primary-yellow: #fdc936;
+}
+
+@font-face {
+  font-family: "NeutraText";
+  src: url("/Fonts/Neutra Text/Neutra Text Book.otf") format("opentype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "NeutraText";
+  src: url("/Fonts/Neutra Text/Neutra Text Bold.otf") format("opentype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "NeutraText";
+  src: url("/Fonts/Neutra Text/Neutra Text Bold Alt.otf") format("opentype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "NeutraText";
+  src: url("/Fonts/Neutra Text/Neutra Text Light Alt.otf") format("opentype");
+  font-weight: 300;
+}
+
+/* utilities */
+
+* {
+  font-family: "NeutraText";
+}
+
+.bg-primary-gray {
+  background-color: var(--primary-gray);
+}
+
+.bg-primary-blue {
+  background-color: var(--primary-blue);
+}
+
+.bg-primary-black {
+  background-color: var(--primary-black);
+}
+
+.bg-primary-yellow {
+  background-color: var(--primary-yellow);
+}
+
+/* navbar */
+.navbar .active {
+  @apply font-bold;
+}
+
+.navbar .active::before {
+  content: "";
+  background-color: var(--primary-yellow);
+  @apply w-full h-[50%] absolute left-0 bottom-0 -rotate-3 z-[-1];
+}
+
+/* table */
+.data-table > div[role="tbody"] div[role="tr"]:hover {
+  background-color: var(--primary-gray);
+}
+
+/* gives the tr in thead border bottom to make it looks like HTML table */
+.data-table > div[role="thead"] div[role="tr"] {
+  @apply border-b-[1px] border-gray-400;
+}
+
+.data-table > div[role="tbody"] > div[role="tr"]:not(:last-child) {
+  @apply border-b-[1px] border-gray-400;
+}
+
+/* pagination */
+
+.page-number {
+  @apply p-1 cursor-pointer;
+}
