@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage, setProducts } from "../../stateSlices/products";
+import {
+  setCategory,
+  setCurrentPage,
+  setProducts,
+} from "../../stateSlices/products";
 import { AppDispatch, RootState } from "../../store";
 import { Product } from "../../types/APIsResponseTypes";
 import searchInObject from "../../util/searchInObject";
@@ -19,15 +23,15 @@ function ProductsTable(): JSX.Element {
   useEffect(() => {
     dispatch(setCurrentPage(1));
     dispatch(setProducts());
+
+    return () => {
+      // Remove the category when user chagne the page
+      dispatch(setCategory(""));
+    };
   }, []);
 
   return (
-    <Table
-      columns={3}
-      matchMaxMediaAt={720}
-      fixAt={800}
-      isLoading={isLoading}
-    >
+    <Table columns={3} matchMaxMediaAt={720} fixAt={800} isLoading={isLoading}>
       <Table.Header>
         <Table.Tr>
           <Table.Th>title</Table.Th>

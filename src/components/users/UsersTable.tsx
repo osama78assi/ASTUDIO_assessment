@@ -1,17 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage, setUsers } from "../../stateSlices/users";
+import { setCurrentPage, setFilter, setUsers } from "../../stateSlices/users";
 import { AppDispatch, RootState } from "../../store";
 import { User } from "../../types/APIsResponseTypes";
-import Table from "../ui/Table";
 import searchInObject from "../../util/searchInObject";
+import Table from "../ui/Table";
 
 function UsersTable() {
   const { users, isLoading, searchValue } = useSelector(
     (state: RootState) => state.users
   );
   // Derived state
-  const filteredUsers = users?.filter((user) => searchInObject(searchValue, user));
+  const filteredUsers = users?.filter((user) =>
+    searchInObject(searchValue, user)
+  );
   const dispatch = useDispatch<AppDispatch>();
   // Only in the initial render call and refresh everything
   // (If it's a real dashboard for many employers RTK Query or TanStack/ReactQuery will be a greate option for managing remote state)
@@ -20,6 +22,11 @@ function UsersTable() {
     dispatch(setCurrentPage(1));
     // This will prepare the users count. Because of API endpoints where there is no getUsersCount or something similar
     dispatch(setUsers());
+
+    return () => {
+      // Clear the filter if exists when user change the page
+      dispatch(setFilter({ filterField: "", filterValue: "" }));
+    };
   }, []);
 
   return (
